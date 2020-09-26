@@ -1,0 +1,9 @@
+#!/bin/bash
+read str
+while [[ "$str" != "q" ]]
+do
+	sumstr+="$str"
+	read str
+done
+echo "$sumstr"
+
