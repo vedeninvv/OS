@@ -1,2 +1,2 @@
 #!/bin/bash
-man bash | 
+man bash | tr -s " " | tr " " '\n'| grep -E '.....*' | uniq -c | sort -nk1 | awk '{print $2}' |tail -n3
