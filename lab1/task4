@@ -1,0 +1,8 @@
+#!/bin/bash
+if [[ ${PWD:0:${#HOME}} == "$HOME" ]]
+then
+echo "$HOME"
+else
+echo "Wrong dir!"
+exit 1
+fi

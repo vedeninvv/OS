@@ -1,0 +1,2 @@
+#!/bin/bash
+grep -rohEIs "[[:alnum:]]+\@[[:alnum:]]+\.[[:alnum:]]+" /etc/* > emails.lst
