@@ -1,0 +1,2 @@
+#!/bin/bash
+ps -ef | grep "/sbin" | awk '{print $2}' > ans2.txt
