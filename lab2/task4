@@ -5,10 +5,10 @@ do
 	ppid=$(awk '$1=="PPid:" {print $2}' /proc/"$pid"/status 2>/dev/null)
 	sum_time=$(awk '$1=="se.sum_exec_runtime" {print $3}' /proc/"$pid"/sched 2>/dev/null)
 	switches=$(awk '$1=="nr_switches" {print $3}' /proc/"$pid"/sched 2>/dev/null)
-	art=$(echo " $sum_time/$switches" | bc -l 2>/dev/null)
+	art=$(echo "$sum_time/$switches" | bc -l 2>/dev/null)
 	if [[ -n "$art" ]] && [[ -n "$ppid" ]]
 	then
 		rezult+="$pid $ppid $art\n"
 	fi
 done
-echo -e "$rezult" | sort -nk2 | awk '{print "ProcessID="$1 " : " "Parent_ProcessID="$2 " : " "Average_Running_Time="$3}' > ans4.txt
+echo -e "$rezult" | sort -nk2 | awk '$0!="" {print "ProcessID="$1 " : " "Parent_ProcessID="$2 " : " "Average_Running_Time="$3}' > ans4.txt

@@ -1,0 +1,23 @@
+#!/bin/bash
+echo "" > ans5.txt
+ppid_last="0"
+sum="0"
+num="0"
+while read line
+do
+	line_ch=$(echo "$line" | tr -d [:alpha:]=:_)
+	ppid=$(echo "$line_ch" | awk '{print $2}')
+	art=$(echo "$line_ch" | awk '{print $3}')
+	if [[ "$ppid" -eq "$ppid_last" ]] || [[ "$num" -eq "0" ]]
+	then
+		sum=$(echo "$sum + $art" | bc)
+		let "num += 1"
+	else
+		avg=$(echo "$sum / $num" | bc -l)
+		echo "Average_Sleeping_Children_ofParentID=$ppid_last is $avg" >> ans5.txt
+		sum="$art"
+		num="1"
+	fi
+	echo "$line" >> ans5.txt
+	ppid_last="$ppid"
+done < ans4.txt
