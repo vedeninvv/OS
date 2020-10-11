@@ -1,0 +1,11 @@
+#!/bin/bash
+r1=$(grep "VmRSS" /proc/*/status | tr -d [:alpha:][:punct:] | sort -nk2 | tail -n1 | awk '{print "PID:" $1 " " "VmRSS:"$2}')
+echo "$r1"
+r2=$(top -bo RES | head -n8 | tail -n1 | awk '{print "PID:"$1 " " "VmRSS:"$6}')
+echo "$r2"
+if [[ "$r1"=="$r2" ]]
+then
+	echo "same"
+else
+	echo "different"
+fi
