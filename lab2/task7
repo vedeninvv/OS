@@ -7,9 +7,12 @@ do
 	pid=$(echo "$line" | awk '{print $1}')
 	bytes1=$(echo "$line" | awk '{print $2}')
 	bytes2=$(grep -s "read_bytes" /proc/"$pid"/io | awk '{print $2}')
-	let "bytes=bytes2-bytes1"
-	path_line=$(ps "$pid" | tail -n1 | awk '{print $5}')
-	echo "$pid:$path_line:$bytes" >> tmp2.txt
+	if [[ -n bytes2 ]]
+	then
+		let "bytes=bytes2-bytes1"
+		path_line=$(ps "$pid" | tail -n1 | awk '{print $5}')
+		echo "$pid:$path_line:$bytes" >> tmp2.txt
+	fi
 done < tmp.txt
 sort -t ':' -rnk3 tmp2.txt | head -n3
 rm tmp.txt
