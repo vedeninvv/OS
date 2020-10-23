@@ -1,4 +1,9 @@
 #!/bin/bash
 usercmds=$(ps -ef | awk '$1=="user" {print  $2 ":" $8}')
-echo "$usercmds" | wc -l > ans1.txt
+if [[ -n "$usercmds" ]]
+then
+	echo "$usercmds" | wc -l > ans1.txt
+else
+	echo "0" > ans1.txt
+fi
 echo "$usercmds" >> ans1.txt

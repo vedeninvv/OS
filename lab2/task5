@@ -21,3 +21,5 @@ do
 	echo "$line" >> ans5.txt
 	ppid_last="$ppid"
 done < ans4.txt
+avg=$(echo "$sum / $num" | bc -l)
+echo "Average_Sleeping_Children_ofParentID=$ppid_last is $avg" >> ans5.txt
