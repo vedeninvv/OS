@@ -1,0 +1,22 @@
+#!/bin/bash
+oper="+"
+num="1"
+pid=$(tail -n1 ~/.canalpid)
+(tail -f canal) |
+while true; do
+	read line
+	if [[ "$line" == "+" ]] || [[ "$line" == "*" ]]; then oper="$line"
+	elif expr "$line" : '[0-9]\+' > /dev/null; then let num=$num$oper$line
+	elif [[ "$line" == "QUIT" ]]
+	then
+		echo "rezult: $num"
+		kill "$pid"
+		killall tail
+		exit
+	else
+		echo "exit 1 - illegal args"
+		kill -s USR1 "$pid"
+		killall tail
+		exit
+	fi
+done

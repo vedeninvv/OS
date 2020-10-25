@@ -1,0 +1,12 @@
+#!/bin/bash
+echo $$ > ~/.canalpid
+usr1()
+{
+	echo "exit 1 - illegal arg"
+	exit
+}
+trap 'usr1' USR1
+while true; do
+	read line
+	echo "$line" > canal
+done
