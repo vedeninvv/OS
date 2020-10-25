@@ -1,0 +1,7 @@
+#!/bin/bash
+echo $$ >> ~/.pid
+x=2
+y=2
+while true; do
+	let x="$x"*"$y"
+done

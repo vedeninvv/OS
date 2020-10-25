@@ -1,0 +1,17 @@
+#!/bin/bash
+pid=$(head -n2 ~/.pid | tail -n1)
+limit=10
+stopped="no"
+while true; do
+	if [[ $(ps -o %cpu "$pid" | tail -n1 | awk -F "." '{print $1}') -ge "$limit" ]]
+	then
+		kill -s SIGSTOP "$pid"
+		stopped="yes"
+	else 
+		if [[ "$stopped"=="yes" ]]
+		then
+			kill -s SIGCONT "$pid"
+			stopped="no"
+		fi
+	fi
+done
