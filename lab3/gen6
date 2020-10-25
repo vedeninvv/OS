@@ -1,0 +1,9 @@
+#!/bin/bash
+pid=$(cat .pid6)
+while true; do
+	read line
+	if [[ "$line" == "+" ]]; then kill -s USR1 "$pid"
+	elif [[ "$line" == "*" ]]; then kill -s USR2 "$pid"
+	elif [[ "$line" == "TERM" ]]; then kill -s SIGTERM "$pid"; exit
+	fi
+done

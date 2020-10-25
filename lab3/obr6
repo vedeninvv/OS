@@ -1,0 +1,28 @@
+#!/bin/bash
+echo $$ > .pid6
+num=1
+oper="nothing"
+usr1()
+{
+	oper="+"
+}
+usr2()
+{
+	oper="*"
+}
+sigterm()
+{
+	echo "finish by signal from another process"
+	exit
+}
+trap 'usr1' USR1
+trap 'usr2' USR2
+trap 'sigterm' SIGTERM
+while true; do
+	case "$oper" in
+		"+") let num=$num+2 ;;
+		"*") let num=$num*2 ;;
+	esac
+	sleep 1
+	echo "$num"
+done
