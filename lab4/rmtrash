@@ -1,0 +1,22 @@
+#!/bin/bash
+if [[ "$#" -ne "1" ]]; then
+	echo "Wrong number of input arguments!"
+	exit 1
+fi
+
+if [[ ! -f "$1" ]]; then
+	echo "File '$1' does not exist"
+	exit 1
+fi
+
+if [[ ! -d "$HOME/.trash" ]]; then
+	mkdir "$HOME/.trash"
+	echo "0" > "$HOME/.trash/.name_num"
+fi
+
+name_link=$(cat "$HOME/.trash/.name_num")
+ln "$PWD/$1" "$HOME/.trash/$name_link"
+rm "$PWD/$1"
+echo "$PWD/$1 $HOME/.trash/$name_link"
+let name_link=name_link+1
+echo "$name_link" > "$HOME/.trash/.name_num"

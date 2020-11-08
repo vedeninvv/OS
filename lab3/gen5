@@ -3,7 +3,7 @@ echo $$ > ~/.canalpid
 usr1()
 {
 	echo "exit 1 - illegal arg"
-	exit
+	exit 1
 }
 trap 'usr1' USR1
 while true; do

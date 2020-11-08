@@ -1,2 +1,2 @@
 #!/bin/bash
-
+echo "*/5 * * * Mon ~/labs/lab3/task1" | crontab

@@ -6,10 +6,12 @@ pid=$(tail -n1 ~/.canalpid)
 while true; do
 	read line
 	if [[ "$line" == "+" ]] || [[ "$line" == "*" ]]; then oper="$line"
-	elif expr "$line" : '[0-9]\+' > /dev/null; then let num=$num$oper$line
+	elif expr "$line" : '[0-9]\+' > /dev/null
+	then
+		let num=$num$oper$line
+		echo "$num"
 	elif [[ "$line" == "QUIT" ]]
 	then
-		echo "rezult: $num"
 		kill "$pid"
 		killall tail
 		exit
@@ -17,6 +19,6 @@ while true; do
 		echo "exit 1 - illegal args"
 		kill -s USR1 "$pid"
 		killall tail
-		exit
+		exit 1
 	fi
 done
