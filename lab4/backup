@@ -1,0 +1,49 @@
+#!/bin/bash
+backup=$(ls "$HOME" | grep -E "^Backup-" | sort | tail -n1)
+
+if [[ ! -d "$HOME/source" ]]; then
+	echo "'source' does not exist"
+	exit 1
+fi
+
+if [[ ! -e "$HOME/backup-report" ]]; then
+	echo "'backup-report' does not exist"
+	exit 1
+fi
+
+date_now=$(date +"%Y-%m-%d")
+date_now_in_sec=$(date -d "$date_now" +"%s")
+
+date_backup=$(echo "$backup" | sed "s/Backup-//")
+date_backup_in_sec=$(date -d "$date_backup" +"%s")
+
+time_dif=$(echo "(${date_now_in_sec} - ${date_backup_in_sec}) / (3600 * 24) " | bc)
+
+if [[ "$time_dif" -ge "7" ]] || [[ -z "$backup" ]]; then
+	mkdir "$HOME/Backup-${date_now}"
+	for line in $(ls "$HOME/source"); do
+		cp "$HOME/source/$line" "$HOME/Backup-${date_now}"
+	done
+	echo -e "New_backup $HOME/Backup-${date_now} ${date_now}\nFiles\n$(ls "$HOME/source")\n" >> "$HOME/backup-report"
+else
+	touch .changed_files.txt
+	touch .new_files.txt
+	for line in $(ls "$HOME/source"); do
+		if [[ ! -f "$HOME/$backup/$line" ]]; then
+			cp "$HOME/source/$line" "$HOME/$backup"
+			echo "$line" >> .new_files.txt
+		else
+			old_size=$(wc -c "$HOME/source/$line" | awk '{print $1}')
+			new_size=$(wc -c "$HOME/$backup/$line" | awk '{print $1}')
+			if [[ "$new_size" -ne "$old_size" ]]; then
+				mv "$HOME/$backup/$line" "$HOME/$backup/$line.${date_now}"
+				echo "$line $line.${date_now}" >> .changed_files.txt
+				cp "$HOME/source/$line" "$HOME/$backup/$line"
+			fi
+		fi
+	done
+	echo -e "Change_backup $backup $date_now\nNew_files:\n$(cat .new_files.txt)\nChanged_files:\n$(cat .changed_files.txt)" >> "$HOME/backup-report"
+	rm .changed_files.txt
+	rm .new_files.txt
+fi
+
