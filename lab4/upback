@@ -5,7 +5,7 @@ fi
 
 mkdir "$HOME/restore"
 
-backup=$(ls "$HOME" | grep -E "^Backup-" | sort | tail -n1)
+backup=$(ls "$HOME" | grep -E "^Backup-[0-9]{4}-[0-9]{2}-[0-9]{2}$" | sort | tail -n1)
 if [[ -z "$backup" ]]; then
 	echo "No any backups!"
 	exit 1
@@ -15,8 +15,6 @@ if [[ -z $(ls "$HOME/$backup") ]]; then
 	echo "Backup is empty!"
 	exit
 fi
-
-date_backup=$(echo "$backup" | sed "s/Backup-//")
 
 for line in $(ls "$HOME/$backup" | grep -vE ".[0-9]{4}-[0-9]{2}-[0-9]{2}$"); do
 	cp "$HOME/$backup/$line" "$HOME/restore/$line"

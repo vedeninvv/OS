@@ -1,5 +1,5 @@
 #!/bin/bash
-backup=$(ls "$HOME" | grep -E "^Backup-" | sort | tail -n1)
+backup=$(ls "$HOME" | grep -E "^Backup-[0-9]{4}-[0-9]{2}-[0-9]{2}$" | sort | tail -n1)
 
 if [[ ! -d "$HOME/source" ]]; then
 	echo "'source' does not exist"
