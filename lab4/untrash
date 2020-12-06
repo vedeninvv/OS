@@ -4,6 +4,11 @@ if [[ "$#" -ne 1 ]]; then
 	exit 1
 fi
 
+if [[ "$1" == *"/"* ]]; then
+	echo "Can not work with full path!"
+	exit 1
+fi
+
 if [[ ! -d "$HOME/.trash" ]]; then
 	echo "Dir of trash does not exist!"
 	exit 1

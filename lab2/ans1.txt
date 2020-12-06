@@ -1,0 +1,8 @@
+7
+1432:/usr/lib/systemd/systemd
+1437:(sd-pam)
+1443:-bash
+1496:/bin/bash
+1497:/bin/bash
+1498:ps
+1499:awk
