@@ -1,0 +1,11 @@
+1)mkdir lab6
+ver > ver
+WMIC LOGICALDISK list brief
+WMIC LOGICALDISK get size, freespace, caption > "WMIC LOGICALDISK get size, freespace, caption"
+WMIC OS get freephysicalmemory > "WMIC OS get freephysicalmemory"
+WMIC COMPUTERSYSTEM get totalphysicalmemory > "WMIC COMPUTERSYSTEM get totalphysicalmemory"
+2)mkdir test
+copy . test
+cd test
+3)type * > allfiles.txt
+4)for /F "skip=1 delims=" %I in ('dir /A-D /B /O-D') do del "%I"

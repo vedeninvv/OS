@@ -1,0 +1,10 @@
+1)hostname
+mkdir "c:\temp"
+net share "temp"="c:\temp"
+2)echo copy /z C:\Windows\git_installer.exe \\DESKTOP-FEE47PI\temp > copyfile.bat
+3)schtasks /Create /SC ONCE /TN taska /TR C:\Users\vadik\Desktop\OS\lab6_2\copyfile.bat /ST 22:27
+4)schtasks /query
+schtasks /run /tn taska
+schtasks /end /tn taska
+5)fc \\DESKTOP-FEE47PI\temp\200MB.zip C:\Windows\200MB.zip
+6)C:\Users\vadik\Desktop\OS\lab6_2\copyfile.bat

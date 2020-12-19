@@ -1,0 +1,3 @@
+Сравнение файлов C:\USERS\VADIK\DESKTOP\OS\LAB6_3\result.txt и C:\USERS\VADIK\DESKTOP\OS\LAB6_3\NEWRESULT.TXT
+FC: различия не найдены
+

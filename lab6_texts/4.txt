@@ -1,0 +1,2 @@
+1)driverquery /FO TABLE /NH > drivers.txt
+2)sort -r drivers.txt > drivers_revers.txt

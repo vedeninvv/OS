@@ -1,0 +1,1 @@
+fc C:\Users\vadik\Desktop\OS\lab6_3\result.txt C:\Users\vadik\Desktop\OS\lab6_3\newresult.txt

@@ -1,0 +1,12 @@
+
+Microsoft Windows [Version 10.0.19042.631]
+TotalPhysicalMemory  
+2147012608           
+Caption  FreeSpace   Size         
+C:       1336393728  16689238016  
+D:       0           4673138688   
+DeviceID  DriveType  FreeSpace   ProviderName  Size         VolumeName  
+C:        3          3582279680                16689238016              
+D:        5          0                         4673138688   ESD-ISO     
+FreePhysicalMemory  
+830716              
